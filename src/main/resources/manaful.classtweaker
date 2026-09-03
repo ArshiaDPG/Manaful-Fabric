@@ -1,3 +1,5 @@
 classTweaker  v1  official
 
 accessible method net/minecraft/world/effect/MobEffect <init> (Lnet/minecraft/world/effect/MobEffectCategory;I)V
+
+accessible method net/minecraft/world/item/Items registerItem (Lnet/minecraft/references/BlockItemId;Ljava/util/function/Function;)Lnet/minecraft/world/item/Item;

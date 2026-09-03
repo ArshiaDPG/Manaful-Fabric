@@ -34,11 +34,8 @@ public class ManaSource {
     }
 
     private boolean changeMana(LivingEntity entity, double amount) {
-        if (entity.hasInfiniteMaterials()){
+        if (entity.hasInfiniteMaterials() || amount == 0){
             return true;
-        }
-        if (amount == 0) {
-            return false;
         }
         mana = Math.clamp(mana + amount, 0, entity.getAttribute(ManaAttributes.MAX_MANA).getValue());
         if (entity instanceof ServerPlayer serverPlayer) {
@@ -49,22 +46,36 @@ public class ManaSource {
     public void increaseMana(LivingEntity entity, double amount) {
         changeMana(entity, amount);
     }
+
+    public void increaseMana(LivingEntity entity, ManaCost manaCost) {
+        increaseMana(entity, getAmount(entity, manaCost));
+    }
+    public void increaseMana(LivingEntity entity, ItemStack stack) {
+        if (!stack.has(ManaDataComponents.MANA_COST)){
+            return;
+        }
+        increaseMana(entity, getAmount(entity, stack.get(ManaDataComponents.MANA_COST)));
+    }
+
     public void decreaseMana(LivingEntity entity, double amount) {
         if (changeMana(entity, -amount) && entity instanceof ServerPlayer player){
             player.awardStat(ManaStats.MANA_USED, (int) (amount * 10));
         }
     }
-    public void increaseMana(LivingEntity entity, ManaCost manaCost) {
-        increaseMana(entity, getAmount(entity, manaCost));
-    }
     public void decreaseMana(LivingEntity entity, ManaCost manaCost) {
         decreaseMana(entity, getAmount(entity, manaCost));
     }
+    public void decreaseMana(LivingEntity entity, ItemStack stack) {
+        if (!stack.has(ManaDataComponents.MANA_COST)){
+            return;
+        }
+        decreaseMana(entity, getAmount(entity, stack.get(ManaDataComponents.MANA_COST)));
+    }
 
-    public double getAmount(LivingEntity entity, ManaCost costType) {
-        double amount = costType.amount();
-        if (costType.operation() == ManaCost.Operation.ADD_PERCENT) {
-            amount = entity.getAttribute(ManaAttributes.MAX_MANA).getValue() * (costType.amount() / 100);
+    public double getAmount(LivingEntity entity, ManaCost manaCost) {
+        double amount = manaCost.amount();
+        if (manaCost.operation() == ManaCost.Operation.ADD_PERCENT) {
+            amount = entity.getAttribute(ManaAttributes.MAX_MANA).getValue() * (manaCost.amount() / 100);
         }
         return amount;
     }
