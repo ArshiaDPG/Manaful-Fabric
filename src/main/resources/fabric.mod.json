@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "manaful",
+  "version": "${version}",
+  "name": "Manaful",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "Apache-2.0",
+  "icon": "assets/manaful/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "org.digitalpear.manaful.client.ManafulDataGenerator"
+    ],
+    "client": [
+      "org.digitalpear.manaful.client.ManafulClient"
+    ],
+    "main": [
+      "org.digitalpear.manaful.Manaful"
+    ]
+  },
+  "mixins": [
+    "manaful.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
