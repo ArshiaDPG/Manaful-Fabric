@@ -1,11 +1,10 @@
 package org.digitalpear.manaful.init;
 
-import com.mojang.serialization.Codec;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import org.digitalpear.manaful.Manaful;
-import org.digitalpear.manaful.common.ManaCost;
+import org.digitalpear.manaful.common.mana.ManaCost;
 
 import java.util.function.UnaryOperator;
 

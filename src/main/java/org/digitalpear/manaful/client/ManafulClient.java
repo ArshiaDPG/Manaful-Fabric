@@ -9,11 +9,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.Identifier;
 import org.digitalpear.manaful.Manaful;
-import org.digitalpear.manaful.common.ManaChangePacket;
-import org.digitalpear.manaful.common.ManaSource;
+import org.digitalpear.manaful.common.mana.ManaChangePacket;
+import org.digitalpear.manaful.common.mana.ManaSource;
 import org.digitalpear.manaful.init.ManaAttachments;
-
-import java.awt.*;
 
 public class ManafulClient implements ClientModInitializer {
 

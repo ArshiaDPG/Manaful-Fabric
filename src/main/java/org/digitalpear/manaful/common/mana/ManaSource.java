@@ -1,4 +1,4 @@
-package org.digitalpear.manaful.common;
+package org.digitalpear.manaful.common.mana;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -6,7 +6,6 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -38,6 +37,8 @@ public class ManaSource {
         if (amount == 0) {
             return false;
         }
+
+
         mana = Math.clamp(mana + amount, 0, entity.getAttribute(ManaAttributes.MAX_MANA).getValue());
         if (entity instanceof ServerPlayer serverPlayer) {
             ServerPlayNetworking.send(serverPlayer, new ManaChangePacket(mana));
@@ -53,10 +54,18 @@ public class ManaSource {
         }
     }
 
+    public double getAmount(LivingEntity entity, ManaCost costType) {
+        double amount = costType.amount();
+        if (costType.operation() == ManaCost.Operation.MAX_PERCENT) {
+            amount = entity.getAttribute(ManaAttributes.MAX_MANA).getValue() * (costType.amount() / 100);
+        }
+        return amount;
+    }
+
     public boolean hasEnoughMana(ItemStack stack) {
         if (!stack.has(ManaDataComponents.MANA_COST)){
             return false;
         }
-        return mana >= stack.get(ManaDataComponents.MANA_COST).cost();
+        return mana >= stack.get(ManaDataComponents.MANA_COST).amount();
     }
 }

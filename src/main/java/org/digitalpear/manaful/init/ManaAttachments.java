@@ -4,7 +4,7 @@ import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentSyncPredicate;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import org.digitalpear.manaful.Manaful;
-import org.digitalpear.manaful.common.ManaSource;
+import org.digitalpear.manaful.common.mana.ManaSource;
 
 public class ManaAttachments {
 
