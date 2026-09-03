@@ -10,6 +10,9 @@ base {
     archivesName = project.modid + "-" + project.minecraft_version
 }
 
+loom {
+    accessWidenerPath = file("src/main/resources/${project.modid}.classtweaker")
+}
 
 fabricApi {
     configureDataGeneration {

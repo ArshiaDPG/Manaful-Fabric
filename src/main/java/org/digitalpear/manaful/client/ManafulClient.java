@@ -21,8 +21,8 @@ public class ManafulClient implements ClientModInitializer {
     public void onInitializeClient() {
         Identifier manaBar = Manaful.id("mana_bar");
 
-        HudStatusBarHeightRegistry.addLeft(manaBar, player -> 0);
-        HudElementRegistry.attachElementAfter(VanillaHudElements.ARMOR_BAR, manaBar, (graphics, deltaTracker) -> {
+        HudStatusBarHeightRegistry.addLeft(manaBar, player -> 11);
+        HudElementRegistry.attachElementAfter(VanillaHudElements.HELD_ITEM_TOOLTIP, manaBar, (graphics, deltaTracker) -> {
             Minecraft mc = Minecraft.getInstance();
             if (mc.player != null) {
                 int height = graphics.guiHeight() - HudStatusBarHeightRegistry.getHeight(VanillaHudElements.ARMOR_BAR);

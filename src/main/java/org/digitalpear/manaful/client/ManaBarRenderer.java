@@ -1,8 +1,5 @@
 package org.digitalpear.manaful.client;
 
-import net.fabricmc.fabric.api.client.rendering.v1.RenderStateDataKey;
-import net.fabricmc.fabric.api.client.rendering.v1.hud.HudStatusBarHeightRegistry;
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -21,7 +18,6 @@ public class ManaBarRenderer {
     private static final Identifier MANA_EMPTY = Manaful.id("textures/gui/sprites/hud/mana_empty.png");
 
     public static final ManaBarRenderer INSTANCE = new ManaBarRenderer();
-
 
     public void extract(GuiGraphicsExtractor graphics, int startX, int startY, Player player) {
         if (player != null) {

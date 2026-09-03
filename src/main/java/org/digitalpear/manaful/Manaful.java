@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.ItemEvents;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.registry.FabricPotionBrewingBuilder;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -16,10 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.digitalpear.manaful.common.ManaChangePacket;
 import org.digitalpear.manaful.common.ManaCost;
-import org.digitalpear.manaful.init.ManaAttachments;
-import org.digitalpear.manaful.init.ManaAttributes;
-import org.digitalpear.manaful.init.ManaDataComponents;
-import org.digitalpear.manaful.init.ManaStats;
+import org.digitalpear.manaful.init.*;
 
 import java.util.logging.Logger;
 
@@ -39,6 +37,8 @@ public class Manaful implements ModInitializer {
         ManaStats.init();
         ManaAttributes.init();
         ManaDataComponents.init();
+        ManaMobEffects.init();
+        ManaPotions.init();
 
         PayloadTypeRegistry.clientboundPlay().register(ManaChangePacket.TYPE, ManaChangePacket.CODEC);
 
