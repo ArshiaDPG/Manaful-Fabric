@@ -12,26 +12,25 @@ import org.digitalpear.manaful.Manaful;
 public record ManaCost(double amount, Operation operation) {
 
     public ManaCost(double amount) {
-        this(amount, Operation.CONSTANT);
+        this(amount, Operation.ADD);
     }
 
     public static final Codec<ManaCost> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.DOUBLE.fieldOf("amount").forGetter(ManaCost::amount),
-            ManaCost.Operation.CODEC.fieldOf("operation").forGetter(ManaCost::operation)
+            ManaCost.Operation.CODEC.fieldOf("operation").orElse(Operation.ADD).forGetter(ManaCost::operation)
     ).apply(instance, ManaCost::new));
 
     public Component tooltip() {
         Component costTooltip = Component.literal("%.1f".formatted((float) amount));
-        if (operation == Operation.MAX_PERCENT) {
+        if (operation == Operation.ADD_PERCENT) {
             costTooltip = Component.literal("%.1f".formatted((float) amount) + "%");
         }
         return CommonComponents.optionNameValue(Component.translatable(Manaful.MOD_ID + ".mana.description"), costTooltip).withColor(TextColor.AQUA);
     }
 
-
     public enum Operation implements StringRepresentable {
-        CONSTANT("constant"),
-        MAX_PERCENT("max_percent");
+        ADD("add"),
+        ADD_PERCENT("add_percent");
 
         public static final Codec<ManaCost.Operation> CODEC = StringRepresentable.fromEnum(ManaCost.Operation::values);
 

@@ -6,7 +6,6 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.ItemEvents;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionResult;
@@ -14,7 +13,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import org.digitalpear.manaful.common.mana.ManaChangePacket;
-import org.digitalpear.manaful.common.mana.ManaSource;
 import org.digitalpear.manaful.common.mana.ManaCost;
 import org.digitalpear.manaful.init.*;
 
@@ -64,15 +62,14 @@ public class Manaful implements ModInitializer {
             ItemStack stack = player.getItemInHand(interactionHand);
             if (stack.is(ItemTags.SWORDS) && player.getAttached(ManaAttachments.MANA).hasEnoughMana(stack)) {
                 level.explode(player, player.getX(), player.getY(), player.getZ(), 1, Level.ExplosionInteraction.NONE);
-                ManaSource source = player.getAttached(ManaAttachments.MANA);
-                source.depleteMana(player, source.getAmount(player, stack.get(ManaDataComponents.MANA_COST)));
+                player.getAttached(ManaAttachments.MANA).decreaseMana(player, stack.get(ManaDataComponents.MANA_COST));
                 return InteractionResult.SUCCESS;
             }
             return null;
         });
 
         DefaultItemComponentEvents.MODIFY.register(context -> {
-            context.modify(item -> item.getDefaultInstance().is(ItemTags.SWORDS), (builder, _) -> builder.set(ManaDataComponents.MANA_COST, new ManaCost(12, ManaCost.Operation.MAX_PERCENT)));
+            context.modify(item -> item.getDefaultInstance().is(ItemTags.SWORDS), (builder, _) -> builder.set(ManaDataComponents.MANA_COST, new ManaCost(12, ManaCost.Operation.ADD_PERCENT)));
             context.modify(Items.WOODEN_SWORD, builder -> builder.set(ManaDataComponents.MANA_COST, new ManaCost(20)));
         });
     }

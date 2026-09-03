@@ -49,15 +49,21 @@ public class ManaSource {
     public void increaseMana(LivingEntity entity, double amount) {
         changeMana(entity, amount);
     }
-    public void depleteMana(LivingEntity entity, double amount) {
+    public void decreaseMana(LivingEntity entity, double amount) {
         if (changeMana(entity, -amount) && entity instanceof ServerPlayer player){
             player.awardStat(ManaStats.MANA_USED, (int) (amount * 10));
         }
     }
+    public void increaseMana(LivingEntity entity, ManaCost manaCost) {
+        increaseMana(entity, getAmount(entity, manaCost));
+    }
+    public void decreaseMana(LivingEntity entity, ManaCost manaCost) {
+        decreaseMana(entity, getAmount(entity, manaCost));
+    }
 
     public double getAmount(LivingEntity entity, ManaCost costType) {
         double amount = costType.amount();
-        if (costType.operation() == ManaCost.Operation.MAX_PERCENT) {
+        if (costType.operation() == ManaCost.Operation.ADD_PERCENT) {
             amount = entity.getAttribute(ManaAttributes.MAX_MANA).getValue() * (costType.amount() / 100);
         }
         return amount;
