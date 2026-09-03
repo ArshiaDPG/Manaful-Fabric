@@ -43,6 +43,7 @@ public class ManafulLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("item.minecraft.potion.effect." + potionId.identifier().getPath(), "Potion of " + translation);
         translationBuilder.add("item.minecraft.splash_potion.effect." + potionId.identifier().getPath(), "Splash Potion of " + translation);
         translationBuilder.add("item.minecraft.lingering_potion.effect." + potionId.identifier().getPath(), "Lingering Potion of " + translation);
+        translationBuilder.add("item.minecraft.tipped_arrow.effect." + potionId.identifier().getPath(), "Arrow of " + translation);
     }
 
     public static void translateStat(TranslationBuilder translationBuilder, Identifier id, String translation){

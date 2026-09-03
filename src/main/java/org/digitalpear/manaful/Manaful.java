@@ -54,9 +54,9 @@ public class Manaful implements ModInitializer {
             }
         });
 
-        if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-            modTests();
-        }
+//        if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+//            modTests();
+//        }
     }
 
     private static void modTests(){

@@ -34,11 +34,12 @@ public class ManaSource {
     }
 
     private boolean changeMana(LivingEntity entity, double amount) {
+        if (entity.hasInfiniteMaterials()){
+            return true;
+        }
         if (amount == 0) {
             return false;
         }
-
-
         mana = Math.clamp(mana + amount, 0, entity.getAttribute(ManaAttributes.MAX_MANA).getValue());
         if (entity instanceof ServerPlayer serverPlayer) {
             ServerPlayNetworking.send(serverPlayer, new ManaChangePacket(mana));

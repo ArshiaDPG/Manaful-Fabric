@@ -18,6 +18,11 @@
   "item.minecraft.splash_potion.effect.mana_regeneration": "Splash Potion of Mana Regeneration",
   "item.minecraft.splash_potion.effect.strong_mana": "Splash Potion of Mana",
   "item.minecraft.splash_potion.effect.strong_mana_regeneration": "Splash Potion of Mana Regeneration",
+  "item.minecraft.tipped_arrow.effect.long_mana_regeneration": "Arrow of Mana Regeneration",
+  "item.minecraft.tipped_arrow.effect.mana": "Arrow of Mana",
+  "item.minecraft.tipped_arrow.effect.mana_regeneration": "Arrow of Mana Regeneration",
+  "item.minecraft.tipped_arrow.effect.strong_mana": "Arrow of Mana",
+  "item.minecraft.tipped_arrow.effect.strong_mana_regeneration": "Arrow of Mana Regeneration",
   "manaful.mana.description": "Mana Cost",
   "stat.manaful.mana_used": "Mana Used"
 }

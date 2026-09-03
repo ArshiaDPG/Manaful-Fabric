@@ -21,6 +21,9 @@ public class ManaBarRenderer {
 
     public void extract(GuiGraphicsExtractor graphics, int startX, int startY, Player player) {
         if (player != null) {
+            if (player.isSpectator() || player.isCreative()) {
+                return;
+            }
             int size = 9;
             int textureSize = 9;
             int maxRowWidth = 10;
@@ -33,7 +36,6 @@ public class ManaBarRenderer {
             double manaRatio = mana / maxMana;
 
             double amount = manaRatio * maxRowWidth;
-            Manaful.LOGGER.info(amount + "");
             for (int i = 0; i < maxRowWidth; i++) {
                 int x = actualX + ((size-1) * i);
 
